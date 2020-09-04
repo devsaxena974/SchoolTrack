@@ -1,0 +1,38 @@
+{% extends "school_track/base.html" %}
+
+{% block content %}
+
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+  
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <h1>Login to access SchoolTrack:</h1>
+    {% endif %}
+  {% endif %}
+  
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <table class="login-info">
+      <tr>
+        <td><b>{{ form.username.label_tag }}</b></td>
+        <td>{{ form.username }}</td>
+      </tr>
+      <tr>
+        <td><b>{{ form.password.label_tag }}</b></td>
+        <td>{{ form.password }}</td>
+      </tr>
+    </table>
+    <input type="submit" value="Login" class="button" />
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+  <p>If for some reason you are not able to login even after registering, register again with the same email.</p>
+  
+  {# Assumes you setup the password_reset view in your URLconf #}
+  <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "school_track/base.html" %}
+{% block content %}
+    <p><a href="{% url 'subjects' subjects.id %}">{{ subjects }}</a></p>
+    <h1>Edit Assignment:</h1>
+    <form action="{% url 'edit_assignment' assignment.id %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name='submit' class="button">Save Changes</button>
+    </form>
+{% endblock content %}

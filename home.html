@@ -1,0 +1,27 @@
+{% extends "school_track/base.html" %}
+
+{% block content %}
+<div>
+    <button class="button">
+        <a href="{% url 'new_subject' %}">Add Subject</a>
+    </button>
+</div>
+<h2>Select a subject to see more options</h2>
+
+<div>
+    <table class="table">
+        <thead>
+            <th class="table-head">YOUR SUBJECTS</th>
+        </thead>
+        <tbody>
+            {% for subject in subjects %}
+                <tr>
+                    <td class="table-cell">
+                        <a href="{% url 'subjects' subject.id %}">{{ subject }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

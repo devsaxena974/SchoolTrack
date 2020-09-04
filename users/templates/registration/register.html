@@ -1,0 +1,13 @@
+{% extends "school_track/base.html" %}
+{% block content %}
+    <div class="register">
+		<form method="POST" class="form-group">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button type="submit" class="button">Register</button>
+		</form>
+		<h2>!!WARNING!!</h2>
+		<p>If your password is <b>LESS THAN OR EQUAL TO 8 CHARACTERS</b> you will not be able to login.</p>
+		<p>If you have already made that mistake don't worry you can register again with the same email.</p>
+	</div>
+{% endblock %}

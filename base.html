@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="School Assignment Tracker">
+        <meta name="keywords" content="SchoolTrack, assignment, tracker, school, homework">
+        <meta name="author" content="Devanshu Saxena">
+        <title>SchoolTrack</title>
+        <style>
+            .table {
+                border: 5px solid black;
+                text-align: center;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            .table-head {
+                border: 1px solid black;
+                text-align: center;
+                padding: 20px;
+                font-size: x-large;
+            }
+            .table-cell {
+                border: 1px solid black;
+                text-align: center;
+                padding: 20px;
+                font-size: large;
+            }
+            .logo {
+                text-align: center;
+                color: black;
+                border: 4px dashed black;
+                background-color: coral;
+                padding: 10px;
+                font-size: xx-large;
+            }
+            .navigation-bar {padding: 10px; border: 4px dashed black; margin-top: 5px; background-color: coral;}
+            
+            .main {
+                text-align: center;
+                border: 4px dashed black;
+                background-color: coral;
+                padding: 10px;
+                margin-top: 5px;
+            }
+            .button {
+                font-size: 16px;
+                margin: 4px 2px;
+                padding: 10px;
+                text-align: center;
+                color:black;
+                background-color:#76D7C4;
+            }
+            .login-info {
+                align-content: center;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 40px;
+            }
+            .register {
+                text-align: left;
+            }
+            
+            .footer {
+                border: 4px dashed black;
+                background-color: coral;
+                padding: 10px;
+                margin-top: 5px;
+            }
+            .user {
+                border: 4px dashed black;
+                background-color: coral;
+                padding: 10px;
+                margin-top: 5px;
+            }
+        </style>
+    </head>
+    <body style="background-color: #FCF3CF  ;">
+        <div class="logo">    
+            <header>
+                <h1><a href="{% url 'home' %}">SchoolTrack</a></h1>
+            </header>
+        </div>
+        <div class="navigation-bar">
+            <nav>
+                {% if user.is_authenticated %}
+                    <button type="button" class="button"><a href="{% url 'home' %}">Home</a></button>
+                    <button type="button" class="button button1">
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </button>   
+                {% else %}
+                    <button type="button" class="button"><a href="{% url 'home' %}">Home</a></button>
+                    <button type="button" class="button"><a href="{% url 'login' %}?next={{ request.path }}">Login</a></button>
+                    <button type="button" class="button"><a href="{% url 'users:register' %}">Register</a></button>
+                    
+                {% endif %} 
+            </nav>
+        </div>
+        <div class="user">
+            {% if user.is_authenticated %}
+                <h1>User: {{ user.get_username }}</h1>
+            {% endif %}
+        </div>
+        <div class="main">
+            {% block content %}
+            {% endblock content %}
+        </div>
+        <div class="footer">
+            <footer>
+                <p style="text-align: left;">This website is created and owned by Devanshu Saxena</p>
+                <p style="text-align: left;">For questions, tech support, and feedback, contact:</p>
+                <p style="text-align: left;">devthegreat974@gmail.com</p>
+            </footer>
+        </div>
+    </body>
+</html>

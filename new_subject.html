@@ -1,0 +1,11 @@
+{% extends "school_track/base.html" %}
+{% block content %}
+    <h1>Add a new subject:</h1>
+    <form action="{% url 'new_subject' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name="submit" class="button">Add Subject</button>
+    </form>
+    <h3>!!WARNING!!</h3>
+    <p>The subjects you enter can not be changed so make sure you are satisfied with your subject names.</p>
+{% endblock content %}

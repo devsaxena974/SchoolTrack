@@ -1,0 +1,28 @@
+{% extends "school_track/base.html" %}
+
+{% block content %}
+<h1>Subject: {{ subjects }}</h1>
+<button class="button"><a href="{% url 'new_assignment' subjects.id %}">Add an assignment</a></button>
+
+<h3>Assignments:</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="table-head">Assignment</th>
+            <th class="table-head">Due Date</th>
+            <th class="table-head">Edit Assignment</th>
+            <th class="table-head">Delete Assignment</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for assignment in assignments %}
+            <tr>
+                <td class="table-cell">{{ assignment.assignment }}</td>
+                <td class="table-cell">{{ assignment.due_date }}</td>
+                <td class="table-cell"><p><a href="{% url 'edit_assignment' assignment.id %}">Edit Assignment</a></p></td>
+                <td class="table-cell"><p><a href="{% url 'delete_assignment' assignment.id %}">Delete Assignment</a></p></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}
